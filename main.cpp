@@ -59,11 +59,9 @@ class bTree{
         root -> keys[0] = data;
         root -> size = 1;
       }
-      
       else{
         addAtLeaf(nullptr, root, data);
       }
-        
     }
 
     void addAtLeaf(node *parent, node *n, int data)
@@ -74,7 +72,6 @@ class bTree{
           n -> keys[i] = n -> keys[i - 1];
           i--;
         }
-
         n -> keys[i] = data;
         n -> size += 1;
       }
@@ -92,7 +89,6 @@ class bTree{
           node* temp = new node(degree);
           temp -> leaf = false;
           temp -> childptr[0] = n;
-          // childptr[0] -> parentptr = temp;
           splitChild(temp, n);
           root = temp;
         }
@@ -114,7 +110,6 @@ class bTree{
       node* rightNode = new node(degree);
       rightNode -> parentptr = parent;
       int mid = (degree - 1) / 2;
-
       // copies half of the left node to right node
       // copies half of the pointer connected to the left node to the right node
       for(int i = 0; i < mid; i++){
@@ -122,8 +117,6 @@ class bTree{
         rightNode -> size += 1;
       }
 
-
-      // ****************************************************************
       // copies half the pointers of the left node to the right node
       if(leftNode -> leaf == false){
         for(int i = 0; i < mid + 1; i++){
@@ -132,7 +125,6 @@ class bTree{
         rightNode -> leaf == false;
       }
 
-      // ****************************************************************
 
       // finds the correct position to add the new array
       int pos;
@@ -181,20 +173,17 @@ class bTree{
           root = temp;
         }
         else{
-          // traverseTree(root, parent);
           splitChild(parent -> parentptr, parent);
         }
       }
     }
 
-// void printLevel(node *n, int level, ostream &out) 
     void printLevel(node *n, int level) 
     {
       if (n == nullptr) return;
       if (level == 1) {
         int i = 0;
         while (i < n -> size) {
-          // out << n -> keys[i] << " ";
           cout << n -> keys[i] << " ";
           i++;
         }
@@ -203,7 +192,6 @@ class bTree{
       else if (level > 1) {
         for (int i = 0; i < degree; i++) {
           if (n -> childptr[i] != nullptr){
-            // printLevel(n -> childptr[i], level - 1, out);
             printLevel(n -> childptr[i], level - 1);
           }
         }
@@ -213,7 +201,6 @@ class bTree{
     int getHeight(node *n, int level) 
     {
       if (n == nullptr) return 0;
-
       if (n->leaf)
         return level;
       else {
